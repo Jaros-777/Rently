@@ -15,8 +15,10 @@ html {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: rgb(0, 0, 0);
-  background-color: #f0eeee;
+  --font-color: black;
+  --main-grey-color: rgba(197, 197, 197, 0.473);
+  color: var(--font-color);
+  background-color: #ffffff;
 }
 
 body {
@@ -26,4 +28,8 @@ body {
 }
 p{
   margin: 0;
+}
+button{
+  background-color: #ffffff00;
+  cursor: pointer;
 }
