@@ -1,4 +1,4 @@
-/* Ensures the html and body elements take full height */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
 html, body {
   height: 100%;
   margin: 0;
@@ -12,11 +12,12 @@ html, body {
 }
 
 html {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
   line-height: 1.5;
   font-weight: 400;
   --font-color: black;
-  --main-grey-color: rgba(197, 197, 197, 0.473);
+  --main-grey-color: rgba(197, 197, 197, 0.35);
+  --second-grey-color: rgba(197, 197, 197, 0.26);
   color: var(--font-color);
   background-color: #ffffff;
 }
