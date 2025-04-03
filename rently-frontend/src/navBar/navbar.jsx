@@ -8,11 +8,14 @@ import Logo from "../assets/Rently-logo.webp";
 import "./navbar.scss";
 import { useEffect, useReducer, useState } from "react";
 import { initialLine, reducerLine } from "./lineReducer.js";
+import { SuggestedLocalizations } from "../DataBase/SuggestedLocalizations.js";
 
 export default function NavBar() {
   const [bigNav, setBigNav] = useState(true);
   const [state, dispatch] = useReducer(reducerLine, initialLine);
-  const [town, setTown] = useState("");
+  let [town, setTown] = useState("");
+  const [proposalTowns, setProposalTowns] = useState([]);
+  const [checkInContainer, setCheckInContainer] = useState(checkInDates);
 
   const handleNavBarSize = () => {
     const navHeight = document.getElementById("navbar-container").style;
@@ -76,6 +79,9 @@ export default function NavBar() {
       .querySelector("img");
     let closeIconToUse = closeIcon;
 
+    let whereDropContext = document.getElementById("where-drop-container").style;
+    let checkInDropContext = document.getElementById("check-in-drop-container").style;
+
     //reset
     whereContainer.classList.remove("changeBgColorToWhite");
     checkInContainer.classList.remove("changeBgColorToWhite");
@@ -86,6 +92,9 @@ export default function NavBar() {
     closeBtnCheckOut.src = emptyIcon;
     closeBtnWho.src = emptyIcon;
 
+    whereDropContext.display="none";
+    checkInDropContext.display="none";
+
     //operation for all switches
     navContainer.backgroundColor = "var(--second-grey-color)";
 
@@ -94,6 +103,7 @@ export default function NavBar() {
         whereContainer.classList.add("changeBgColorToWhite");
         searchBtn.display = "block";
         closeBtnWhere.src = closeIconToUse;
+        whereDropContext.display="block";
 
         break;
 
@@ -101,6 +111,7 @@ export default function NavBar() {
         checkInContainer.classList.add("changeBgColorToWhite");
         searchBtn.display = "block";
         closeBtnCheckIn.src = closeIconToUse;
+        checkInDropContext.display="block";
 
         break;
 
@@ -121,11 +132,60 @@ export default function NavBar() {
       case "exit":
         navContainer.backgroundColor = "white";
         searchBtn.display = "none";
-        // closeBtn.src = emptyIcon;
+        whereDropContext.display="none";
+
         break;
     }
   };
 
+  const setCurrentTown=(place)=>{
+      setTown(place);
+  }
+
+  const getTownApi= async()=>{
+    const respone = await fetch(`https://secure.geonames.org/searchJSON?q=${town}&maxRows=10&username=${import.meta.env.VITE_GEONAME_USERNAME}`);
+    //const respone = await fetch(`view-source:http://api.geonames.org/searchJSON?q=${town}&maxRows=10&username=${import.meta.env.VITE_GEONAME_USERNAME}`);
+    if(!respone){
+      console.log("Geonames api don't work");
+      
+    }else{
+      const json = await respone.json();
+      console.log(json.geonames);
+
+      setProposalTowns([]);
+      for(town in json.geonames){
+        // console.log(town);
+        // setProposalTowns([...proposalTowns, {}])
+      }
+
+    }
+  }
+
+  function checkInDates (){
+    
+    return(
+      <div id="check-in-dates">
+        <div id="calendar-container">
+          <div id="calendar-left"></div>
+          <div id="calendar-right"></div>
+        </div>
+        <div id="dates-margin">
+          <button>Exact dates</button>
+          <button>± 1 day</button>
+          <button>± 2 days</button>
+          <button>± 3 days</button>
+          <button>± 7 days</button>
+          <button>± 14 days</button>
+        </div>
+      </div>
+    )
+  }
+
+  // useEffect(()=>{
+  //   getTownApi();
+  // },town)
+
+  //after click anywhere navBar will be smalles and all options will return to start state
   document.addEventListener("click", (event) => {
     let navContainer = document.getElementById("big-nav-inputs");
 
@@ -133,6 +193,7 @@ export default function NavBar() {
       handleChoosenOption("exit");
     }
   });
+
 
   return (
     <div id="navbar-container">
@@ -170,6 +231,33 @@ export default function NavBar() {
               alt="Close-icon"
             />
           </div>
+            <div id="where-drop-container">
+              <p style={{fontSize: "0.8rem", }}>Suggested destinations</p>
+              <ul>
+                {
+                // town == ""? 
+              SuggestedLocalizations.map((localization)=>(
+                <li onClick={()=>{setCurrentTown(localization.town); handleChoosenOption("check-in")}}key={localization.id}>
+                  <img src={localization.img} alt="" />
+                  <div className="localization-content">
+                    <p style={{ fontSize: "0.9rem", fontWeight:"bold"}} >{localization.town} {localization.country == null ? null : "," }{localization.country}</p>
+                    <p style={{ fontSize: "0.9rem", color: "grey" }}>{localization.description}</p>
+                  </div>
+                </li>
+              )) 
+              // : proposalTowns.map((localization)=>(
+              //   <li onClick={()=>setCurrentTown(localization.town)} key={localization.id}>
+              //     <img src="#" alt="" />
+              //     <div className="localization-content">
+              //       {/* <p style={{ fontSize: "0.9rem", fontWeight:"bold"}} >{localization.town} {localization.country == null ? null : "," }{localization.country}</p>
+              //       <p style={{ fontSize: "0.9rem", color: "grey" }}>{localization.description}</p> */}
+              //       <p style={{ fontSize: "0.9rem", fontWeight:"bold" }}>{localization.name}</p>
+              //     </div>
+              //   </li>
+              // ))
+              }
+              </ul>
+            </div>
           {/* <div style={{backgroundColor: state.line1 ? "var(--main-grey-color)" : "rgba(255, 255, 255, 0)"}} className="line"></div> */}
           <div
             onClick={() => handleChoosenOption("check-in")}
@@ -182,6 +270,15 @@ export default function NavBar() {
               <p style={{ fontSize: "0.9rem", color: "grey" }}>Add dates</p>
             </div>
             <img src={emptyIcon} alt="Close-icon" />
+            
+          </div>
+          <div id="check-in-drop-container">
+            <div id="type-time">
+              <button>Dates</button>
+              <button>Months</button>
+              <button>Flexible</button>
+            </div>
+              {checkInContainer}
           </div>
           {/* <div style={{backgroundColor: state.line2 ? "var(--main-grey-color)" : "rgba(255, 255, 255, 0)"}} className="line"></div> */}
           <div

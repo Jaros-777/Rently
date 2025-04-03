@@ -1,0 +1,15 @@
+#home-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+
+  #cards-container {
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 2rem;
+  }
+}
