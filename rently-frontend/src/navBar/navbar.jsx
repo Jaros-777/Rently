@@ -9,13 +9,14 @@ import "./navbar.scss";
 import { useEffect, useReducer, useState } from "react";
 import { initialLine, reducerLine } from "./lineReducer.js";
 import { SuggestedLocalizations } from "../DataBase/SuggestedLocalizations.js";
+import CheckInContainer from "./CheckInContainer.jsx";
 
 export default function NavBar() {
   const [bigNav, setBigNav] = useState(true);
   const [state, dispatch] = useReducer(reducerLine, initialLine);
   let [town, setTown] = useState("");
   const [proposalTowns, setProposalTowns] = useState([]);
-  const [checkInContainer, setCheckInContainer] = useState(checkInDates);
+
 
   const handleNavBarSize = () => {
     const navHeight = document.getElementById("navbar-container").style;
@@ -111,7 +112,7 @@ export default function NavBar() {
         checkInContainer.classList.add("changeBgColorToWhite");
         searchBtn.display = "block";
         closeBtnCheckIn.src = closeIconToUse;
-        checkInDropContext.display="block";
+        checkInDropContext.display="flex";
 
         break;
 
@@ -119,7 +120,7 @@ export default function NavBar() {
         checkOutContainer.classList.add("changeBgColorToWhite");
         searchBtn.display = "block";
         closeBtnCheckOut.src = closeIconToUse;
-
+        checkInDropContext.display="flex";
         break;
 
       case "who":
@@ -161,25 +162,7 @@ export default function NavBar() {
     }
   }
 
-  function checkInDates (){
-    
-    return(
-      <div id="check-in-dates">
-        <div id="calendar-container">
-          <div id="calendar-left"></div>
-          <div id="calendar-right"></div>
-        </div>
-        <div id="dates-margin">
-          <button>Exact dates</button>
-          <button>± 1 day</button>
-          <button>± 2 days</button>
-          <button>± 3 days</button>
-          <button>± 7 days</button>
-          <button>± 14 days</button>
-        </div>
-      </div>
-    )
-  }
+ 
 
   // useEffect(()=>{
   //   getTownApi();
@@ -272,14 +255,7 @@ export default function NavBar() {
             <img src={emptyIcon} alt="Close-icon" />
             
           </div>
-          <div id="check-in-drop-container">
-            <div id="type-time">
-              <button>Dates</button>
-              <button>Months</button>
-              <button>Flexible</button>
-            </div>
-              {checkInContainer}
-          </div>
+          <CheckInContainer></CheckInContainer>
           {/* <div style={{backgroundColor: state.line2 ? "var(--main-grey-color)" : "rgba(255, 255, 255, 0)"}} className="line"></div> */}
           <div
             onClick={() => handleChoosenOption("check-out")}

@@ -27,7 +27,7 @@ body {
   padding: 0;
   height: 100%;
 }
-p{
+p,h4{
   margin: 0;
 }
 button{

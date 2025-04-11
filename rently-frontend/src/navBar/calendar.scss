@@ -1,0 +1,37 @@
+#calendar-container{
+    width: 50%;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+
+    #calendar-content{
+        width: 90%;
+        display: grid;
+        grid-template-columns: repeat(7, calc(100%/7));
+        align-items: center;
+        margin-top: 1rem;
+        p{
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            aspect-ratio: 1/1;
+            color: grey;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .full-day{
+            cursor: pointer;
+            color: black;
+            font-size: 1rem;
+            font-weight: 400;
+
+            &:hover{
+                border:2px solid black;
+            }
+        }
+    }
+}

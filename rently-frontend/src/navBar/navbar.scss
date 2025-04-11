@@ -199,19 +199,7 @@
     #input-form-check-in {
       @extend #input-form-where;
     }
-    #check-in-drop-container{
-      position: absolute;
-      top: 10rem;
-      left: 17rem;
-      background-color: white;
-      border-radius: 20px;
-      padding: 2rem;
-      box-shadow: 0px 0px 20px grey;
-      width: 55rem;
-      height: 27rem;
-      scroll-margin-top: 10px;
-      display: none;
-    }
+    
     #input-form-check-out {
       @extend #input-form-where;
     }
