@@ -1,3 +1,10 @@
+#btn-prevoius, #btn-next{
+    width: 5%;
+    button{
+        border: none;
+    }
+}
+
 #calendar-container{
     width: 50%;
     margin: 1rem;
@@ -23,15 +30,31 @@
             font-size: 0.8rem;
             font-weight: bold;
         }
-        .full-day{
-            cursor: pointer;
-            color: black;
+        .behind-day{
             font-size: 1rem;
             font-weight: 400;
+            color: rgb(202, 202, 202);
+            cursor: default;
+            &:hover{
+                border:none;
+            }
+        }
+
+        button{
+            border-radius: 100px;
+            border: none;
+            aspect-ratio: 1/1;
+            font-size: 1rem;
 
             &:hover{
                 border:2px solid black;
             }
+
+        }
+
+        .selected-day{
+            color: white;
+            background-color: black;
         }
     }
 }

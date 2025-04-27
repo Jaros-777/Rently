@@ -58,4 +58,52 @@ export const HousesData =[
         price: 1000,
         img: img
     },
+    {
+        id: 7,
+        country:"Poland",
+        town:"Toruń",
+        owner: "Piotr",
+        price: 1000,
+        img: img
+    },
+    {
+        id: 8,
+        country:"Poland",
+        town:"Toruń",
+        owner: "Piotr",
+        price: 1000,
+        img: img
+    },
+    {
+        id: 9,
+        country:"Poland",
+        town:"Toruń",
+        owner: "Piotr",
+        price: 1000,
+        img: img
+    },
+    {
+        id: 10,
+        country:"Poland",
+        town:"Toruń",
+        owner: "Piotr",
+        price: 1000,
+        img: img
+    },
+    {
+        id: 11,
+        country:"Poland",
+        town:"Toruń",
+        owner: "Piotr",
+        price: 1000,
+        img: img
+    },
+    {
+        id: 12,
+        country:"Poland",
+        town:"Toruń",
+        owner: "Piotr",
+        price: 1000,
+        img: img
+    },
 ]

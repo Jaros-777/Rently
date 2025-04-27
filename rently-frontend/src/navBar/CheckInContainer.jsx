@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import Calendar from "./calendar.jsx";
 import "./CheckInContainer.scss"
+import emptyIcon from "../assets/empty.png";
 
-export default function CheckInContainer(){
+export default function CheckInContainer(props){
     const [choosenDate, setChoosenDate] = useState({
         year: new Date().getFullYear(),
         month: new Date().getMonth(),
@@ -16,8 +17,8 @@ export default function CheckInContainer(){
           return(
           <div id="check-in-dates">
             <div id="calendars-container">
-            <Calendar year ={choosenDate.year} month={choosenDate.month}></Calendar>
-            <Calendar year ={choosenDate.year} month={choosenDate.month+1}></Calendar>
+            <Calendar checkInDate={props.checkInDate} checkOutDate={props.checkOutDate} setCheckInDate={props.setCheckInDate} setCheckOutDate={props.setCheckOutDate} activeTab={props.activeTab} year ={choosenDate.year} month={choosenDate.month}></Calendar>
+            {/* <Calendar setCheckInDate={props.setCheckInDate} setCheckOutDate={props.setCheckOutDate} activeTab={props.activeTab} year ={choosenDate.year} month={choosenDate.month+1}></Calendar> */}
             </div>
             <div id="dates-margin">
               <button onClick={()=>setDatesMargin("Exact")} style={datesMargin === "Exact" ? {backgroundColor:"var(--main-grey-color)", border:"2px solid black"}: {backgroundColor:"rgba(255, 255, 255, 0)", border:"2px solid grey"}}>Exact dates</button>
@@ -50,5 +51,6 @@ export default function CheckInContainer(){
             </div>
               {renderContainer()}
           </div>
+          
     )
 }

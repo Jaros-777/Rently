@@ -21,9 +21,9 @@ function HomePage() {
     }
   }
 
-  useEffect(()=>{
-    getHouses();
-  },[])
+  // useEffect(()=>{
+  //   getHouses();
+  // },[])
 
 
 
