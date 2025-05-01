@@ -29,7 +29,7 @@ function HomePage() {
 
   return (
     <>
-      <NavBar></NavBar>
+      <NavBar/>
       <div id="home-container">
         <div id="cards-container">
           {houseData.map((offert) => (

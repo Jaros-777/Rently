@@ -33,6 +33,7 @@ export default function CheckInContainer(props){
       }
 
 
+
       function renderContainer(){
         switch(choosenContainer){
             case "dates":

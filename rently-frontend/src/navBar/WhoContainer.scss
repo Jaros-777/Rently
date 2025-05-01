@@ -1,0 +1,104 @@
+#who-drop-container{
+    position: fixed;
+    top: 10rem;
+    left: 55rem;
+    background-color: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0px 0px 20px grey;
+    width: 23rem;
+    scroll-margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .person-category{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        margin: 1rem 0;
+
+        .category-left{
+            p{
+                &:first-child{
+                    font-weight: bold;
+
+                }
+                &:last-child{
+                    font-size: 0.9rem;
+                    color: grey;
+                }
+            }
+        }
+        .category-right{
+            display: flex;
+            align-items: center;
+
+            button{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 2px solid rgba(128, 128, 128, 1);
+                border-radius: 100%;
+                width: 2rem;
+                height: 2rem;
+                font-size: 1.5rem;
+            }
+            p{
+                font-size: 1.3rem;
+                margin: 0 1rem;
+            }
+            .disable-btn{
+                background-color: red;
+            }
+        }
+    }
+}
+#drop-pets-info{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(128, 128, 128, 0.616);
+    top: 0rem;
+    left: 0rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    #pets-content{
+        width: 25rem;
+        background-color: white;
+        padding: 2rem;
+        border-radius: 20px;
+
+        button{
+            height: 2rem;
+            width: 2rem;
+            border: none;
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem;
+
+            &:hover{
+                background-color: var(--main-grey-color);
+            }
+            img{
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+
+        img{
+            width: 100%;
+            object-fit: contain;
+        }
+        p{
+            margin: 1rem 0;
+        }
+    }
+
+    
+}

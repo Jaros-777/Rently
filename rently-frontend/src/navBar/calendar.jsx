@@ -58,7 +58,7 @@ export default function Calendar(props) {
     if (props.activeTab == "check-in") {
       if (props.checkOutDate < choosenDate) {
         props.setCheckOutDate("Add dates");
-        setSelectedLastDay({ day: null, month: null });
+        setSelectedLastDay({ day: null, month: null, year:null });
       } 
 
         props.setCheckInDate(choosenDate);
@@ -72,7 +72,7 @@ export default function Calendar(props) {
         props.setCheckInDate(choosenDate);
         setSelectedFirstDay({ day: day, month: date.getMonth(), year: date.getFullYear() });
         props.setCheckOutDate("Add dates");
-        setSelectedLastDay({ day: null, month: null });
+        setSelectedLastDay({ day: null, month: null, year:null });
 
       } else {
         props.setCheckOutDate(choosenDate);
@@ -104,7 +104,6 @@ export default function Calendar(props) {
   const incrementMonth=()=>{
 
       if(currentMonth == 10 && nextMonth ==11){
-        console.log("koniec roku")
         setCurrentMonth(currentMonth+1); 
         setNextMonth(0)
         setNextYear(nextYear+1)
@@ -117,7 +116,6 @@ export default function Calendar(props) {
         setCurrentMonth(currentMonth+1); 
         setNextMonth(nextMonth+1)
       }
-      console.log(currentMonth,nextMonth )
       
   }
 

@@ -5,22 +5,27 @@ import searchIcon from "../assets/search-icon.png";
 import closeIcon from "../assets/icon-close-black.png";
 import emptyIcon from "../assets/empty.png";
 import Logo from "../assets/Rently-logo.webp";
+import localizationIcon from "../assets/icon-localization.png";
 import "./navbar.scss";
 import { useEffect, useReducer, useState } from "react";
 import { initialLine, reducerLine } from "./lineReducer.js";
 import { SuggestedLocalizations } from "../DataBase/SuggestedLocalizations.js";
 import CheckInContainer from "./CheckInContainer.jsx";
+import WhoContainer from "./WhoContainer.jsx";
+import Filters from "./Filters.jsx";
 
 export default function NavBar() {
   const [bigNav, setBigNav] = useState(false);
   const [state, dispatch] = useReducer(reducerLine, initialLine);
   let [town, setTown] = useState("");
   const [proposalTowns, setProposalTowns] = useState([]);
-  const[activeTab, setActivTab] = useState("");
+  const [activeTab, setActivTab] = useState("");
   const [checkInDate, setCheckInDate] = useState("Add dates");
   const [checkOutDate, setCheckOutDate] = useState("Add dates");
-
-
+  const [whoInputText, setWhoInputText] = useState("Add guests");
+  const [showWhereContainer, setShowWhereContainer] = useState(false);
+  const [showCheckContainer, setShowCheckContainer] = useState(false);
+  const [showWhoContainer, setShowWhoContainer] = useState(false);
 
   const handleLineShow = (number) => {
     switch (number) {
@@ -73,8 +78,9 @@ export default function NavBar() {
       .querySelector("img");
     let closeIconToUse = closeIcon;
 
-    let whereDropContext = document.getElementById("where-drop-container").style;
-    let checkInDropContext = document.getElementById("check-in-drop-container").style;
+    //let whereDropContext = document.getElementById("where-drop-container").style;
+    //let checkInDropContext = document.getElementById("check-in-drop-container").style;
+    //let whoDropContext = document.getElementById("who-drop-container").style;
 
     //reset
     whereContainer.classList.remove("changeBgColorToWhite");
@@ -86,8 +92,13 @@ export default function NavBar() {
     closeBtnCheckOut.src = emptyIcon;
     closeBtnWho.src = emptyIcon;
 
-    whereDropContext.display="none";
-    checkInDropContext.display="none";
+    setShowWhereContainer(false);
+    setShowCheckContainer(false);
+    setShowWhoContainer(false);
+
+    //whereDropContext.display="none";
+    //checkInDropContext.display="none";
+    //whoDropContext.display="none";
 
     //operation for all switches
     navContainer.backgroundColor = "var(--second-grey-color)";
@@ -97,7 +108,8 @@ export default function NavBar() {
         whereContainer.classList.add("changeBgColorToWhite");
         searchBtn.display = "block";
         closeBtnWhere.src = closeIconToUse;
-        whereDropContext.display="block";
+        //whereDropContext.display="block";
+        setShowWhereContainer(true);
 
         break;
 
@@ -105,8 +117,9 @@ export default function NavBar() {
         checkInContainer.classList.add("changeBgColorToWhite");
         searchBtn.display = "block";
         closeBtnCheckIn.src = closeIconToUse;
-        checkInDropContext.display="flex";
+        //checkInDropContext.display="flex";
         setActivTab("check-in");
+        setShowCheckContainer(true);
 
         break;
 
@@ -114,58 +127,68 @@ export default function NavBar() {
         checkOutContainer.classList.add("changeBgColorToWhite");
         searchBtn.display = "block";
         closeBtnCheckOut.src = closeIconToUse;
-        checkInDropContext.display="flex";
+        //checkInDropContext.display="flex";
         setActivTab("check-out");
+        setShowCheckContainer(true);
+
         break;
 
       case "who":
         whoContainer.classList.add("changeBgColorToWhite");
         searchBtn.display = "block";
         closeBtnWho.src = closeIconToUse;
+        //whoDropContext.display="flex";
+        setShowWhoContainer(true);
 
         break;
 
       case "exit":
         navContainer.backgroundColor = "white";
         searchBtn.display = "none";
-        whereDropContext.display="none";
-
+        //whereDropContext.display="none";
+        // setShowWhereContainer(false);
+        // setShowCheckContainer(false);
+        // setShowWhoContainer(false);
         break;
     }
   };
 
-  const setCurrentTown=(place)=>{
-      setTown(place);
-  }
+  const setCurrentTown = (place) => {
+    setTown(place);
+  };
 
-  const getTownApi= async()=>{
-    const respone = await fetch(`https://secure.geonames.org/searchJSON?q=${town}&maxRows=10&username=${import.meta.env.VITE_GEONAME_USERNAME}`);
+  const getTownApi = async () => {
+    const respone = await fetch(
+      `https://secure.geonames.org/searchJSON?q=${town}&maxRows=10&username=${
+        import.meta.env.VITE_GEONAME_USERNAME
+      }`
+    );
     //const respone = await fetch(`view-source:http://api.geonames.org/searchJSON?q=${town}&maxRows=10&username=${import.meta.env.VITE_GEONAME_USERNAME}`);
-    if(!respone){
+    if (!respone) {
       console.log("Geonames api don't work");
-      
-    }else{
+    } else {
       const json = await respone.json();
-      console.log(json.geonames);
+      //console.log(json.geonames);
 
       setProposalTowns([]);
-      for(town in json.geonames){
-        // console.log(town);
-        // setProposalTowns([...proposalTowns, {}])
+      for (let i in json.geonames) {
+        //console.log(json.geonames[i].name);
+        setProposalTowns((prev) => [...prev, json.geonames[i].name]);
       }
-
     }
-  }
-
- 
-
+  };
   useEffect(() => {
-    const navHeight = document.getElementById("navbar-container").style;
+    getTownApi();
+  }, [town]);
+
+  // watch over navbar size
+  useEffect(() => {
+    const navHeight = document.getElementById("nav-content").style;
     const handleScroll = () => {
-      if(window.scrollY !== 0){
+      if (window.scrollY !== 0) {
         setBigNav(false);
-        navHeight.height = "3rem";
-      }else{
+        navHeight.height = "4rem";
+      } else {
         setBigNav(true);
         navHeight.height = "9rem";
       }
@@ -173,21 +196,21 @@ export default function NavBar() {
       // handleNavBarSize();
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     // Wywołaj od razu na wypadek, gdyby użytkownik był już scrolnięty
     handleScroll();
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  useEffect(()=>{
-    if(checkInDate != "Add dates"){
-      handleChoosenOption("check-out")
+  useEffect(() => {
+    if (checkInDate != "Add dates") {
+      handleChoosenOption("check-out");
     }
-  }, [checkInDate])
+  }, [checkInDate]);
 
   //after click anywhere navBar will be smalles and all options will return to start state
   document.addEventListener("click", (event) => {
@@ -198,9 +221,10 @@ export default function NavBar() {
     }
   });
 
-
   return (
     <div id="navbar-container">
+      <div id="nav-content">
+
       <div id="nav-logo">
         <a href="#">
           <img src={Logo} alt="Logo" />
@@ -208,10 +232,8 @@ export default function NavBar() {
         </a>
       </div>
       {bigNav ? (
-        <div
-          style={{ backgroundColor: "white" }}
-          id="big-nav-inputs"
-        >
+        <div id="big-nav-container">
+        <div style={{ backgroundColor: "white" }} id="big-nav-inputs">
           <div
             onClick={() => handleChoosenOption("where")}
             onMouseOver={() => handleLineShow(1)}
@@ -234,33 +256,59 @@ export default function NavBar() {
               alt="Close-icon"
             />
           </div>
+          {showWhereContainer ? (
             <div id="where-drop-container">
-              <p style={{fontSize: "0.8rem", }}>Suggested destinations</p>
-              <ul>
-                {
-                // town == ""? 
-              SuggestedLocalizations.map((localization)=>(
-                <li onClick={()=>{setCurrentTown(localization.town); handleChoosenOption("check-in")}}key={localization.id}>
-                  <img src={localization.img} alt="" />
-                  <div className="localization-content">
-                    <p style={{ fontSize: "0.9rem", fontWeight:"bold"}} >{localization.town} {localization.country == null ? null : "," }{localization.country}</p>
-                    <p style={{ fontSize: "0.9rem", color: "grey" }}>{localization.description}</p>
-                  </div>
-                </li>
-              )) 
-              // : proposalTowns.map((localization)=>(
-              //   <li onClick={()=>setCurrentTown(localization.town)} key={localization.id}>
-              //     <img src="#" alt="" />
-              //     <div className="localization-content">
-              //       {/* <p style={{ fontSize: "0.9rem", fontWeight:"bold"}} >{localization.town} {localization.country == null ? null : "," }{localization.country}</p>
-              //       <p style={{ fontSize: "0.9rem", color: "grey" }}>{localization.description}</p> */}
-              //       <p style={{ fontSize: "0.9rem", fontWeight:"bold" }}>{localization.name}</p>
-              //     </div>
-              //   </li>
-              // ))
-              }
-              </ul>
+              <div id="where-drop-content">
+                <p style={{ fontSize: "0.8rem" }}>Suggested destinations</p>
+                <ul>
+                  {town == ""
+                    ? SuggestedLocalizations.map((localization, id) => (
+                        <li
+                          onClick={() => {
+                            setCurrentTown(localization.town);
+                            handleChoosenOption("check-in");
+                          }}
+                          key={id}
+                        >
+                          <img src={localization.img} alt="" />
+                          <div className="localization-content">
+                            <p
+                              style={{ fontSize: "0.9rem", fontWeight: "bold" }}
+                            >
+                              {localization.town}{" "}
+                              {localization.country == null ? null : ","}
+                              {localization.country}
+                            </p>
+                            <p style={{ fontSize: "0.9rem", color: "grey" }}>
+                              {localization.description}
+                            </p>
+                          </div>
+                        </li>
+                      ))
+                    : proposalTowns.map((localization, id) => (
+                        <li
+                          onClick={() => {
+                            setCurrentTown(localization);
+                            handleChoosenOption("check-in");
+                          }}
+                          key={id}
+                        >
+                          <img src={localizationIcon} alt="Localization Icon" />
+                          <div className="localization-content">
+                            {/* <p style={{ fontSize: "0.9rem", fontWeight:"bold"}} >{localization.town} {localization.country == null ? null : "," }{localization.country}</p>
+                    <p style={{ fontSize: "0.9rem", color: "grey" }}>{localization.description}</p> */}
+                            <p
+                              style={{ fontSize: "0.9rem", fontWeight: "bold" }}
+                            >
+                              {localization}
+                            </p>
+                          </div>
+                        </li>
+                      ))}
+                </ul>
+              </div>
             </div>
+          ) : null}
           {/* <div style={{backgroundColor: state.line1 ? "var(--main-grey-color)" : "rgba(255, 255, 255, 0)"}} className="line"></div> */}
           <div
             onClick={() => handleChoosenOption("check-in")}
@@ -270,12 +318,30 @@ export default function NavBar() {
           >
             <div id="main-of-input">
               <p>Check-in</p>
-              <p style={{ fontSize: "0.9rem", color: "grey" }}>{checkInDate == "Add dates" ? checkInDate : checkInDate.toLocaleDateString("en-US", {day:"numeric", month:"short"})}</p>
+              <p style={{ fontSize: "0.8rem", color: "grey" }}>
+                {checkInDate == "Add dates"
+                  ? checkInDate
+                  : checkInDate.toLocaleDateString("en-US", {
+                      day: "numeric",
+                      month: "short",
+                    })}
+              </p>
             </div>
-            <img onClick={()=>setCheckInDate("Add dates")} src={emptyIcon} alt="Close-icon" />
-            
+            <img
+              onClick={() => setCheckInDate("Add dates")}
+              src={emptyIcon}
+              alt="Close-icon"
+            />
           </div>
-          <CheckInContainer checkInDate={checkInDate} checkOutDate={checkOutDate} setCheckInDate={setCheckInDate} setCheckOutDate={setCheckOutDate} activeTab={activeTab}></CheckInContainer>
+          {showCheckContainer ? (
+            <CheckInContainer
+              checkInDate={checkInDate}
+              checkOutDate={checkOutDate}
+              setCheckInDate={setCheckInDate}
+              setCheckOutDate={setCheckOutDate}
+              activeTab={activeTab}
+            ></CheckInContainer>
+          ) : null}
           {/* <div style={{backgroundColor: state.line2 ? "var(--main-grey-color)" : "rgba(255, 255, 255, 0)"}} className="line"></div> */}
           <div
             onClick={() => handleChoosenOption("check-out")}
@@ -285,9 +351,20 @@ export default function NavBar() {
           >
             <div id="main-of-input">
               <p>Check-out</p>
-              <p style={{ fontSize: "0.9rem", color: "grey" }}>{checkOutDate == "Add dates" ? checkOutDate : checkOutDate.toLocaleDateString("en-US", {day:"numeric", month:"short"})}</p>
+              <p style={{ fontSize: "0.8rem", color: "grey" }}>
+                {checkOutDate == "Add dates"
+                  ? checkOutDate
+                  : checkOutDate.toLocaleDateString("en-US", {
+                      day: "numeric",
+                      month: "short",
+                    })}
+              </p>
             </div>
-            <img onClick={()=>setCheckOutDate("Add dates")} src={emptyIcon} alt="Close-icon" />
+            <img
+              onClick={() => setCheckOutDate("Add dates")}
+              src={emptyIcon}
+              alt="Close-icon"
+            />
           </div>
           {/* <div style={{backgroundColor: state.line3 ? "var(--main-grey-color)" : "rgba(255, 255, 255, 0)"}} className="line"></div> */}
           <div
@@ -298,7 +375,9 @@ export default function NavBar() {
           >
             <div id="main-of-input">
               <p>Who</p>
-              <p style={{ fontSize: "0.9rem", color: "grey" }}>Add guests</p>
+              <p style={{ fontSize: "0.8rem", color: "grey" }}>
+                {whoInputText}
+              </p>
             </div>
             <img src={emptyIcon} alt="Close-icon" />
             <div id="search-btn-container">
@@ -308,9 +387,16 @@ export default function NavBar() {
               </button>
             </div>
           </div>
+          {showWhoContainer ? (
+            <WhoContainer
+              whoInputText={whoInputText}
+              setWhoInputText={setWhoInputText}
+            ></WhoContainer>
+          ) : null}
+        </div>
         </div>
       ) : (
-        <div  id="small-nav-inputs">
+        <div id="small-nav-inputs">
           <button className="input-btn" style={{ fontWeight: "bold" }}>
             Anywhere
           </button>
@@ -319,7 +405,7 @@ export default function NavBar() {
             Any week
           </button>
           <div className="line"></div>
-          <button className="input-btn">Add guests</button>
+          <button className="input-btn">{whoInputText}</button>
           <button id="input-search-btn">
             <img src={searchIcon} alt="Search-icon" />
           </button>
@@ -337,6 +423,8 @@ export default function NavBar() {
           <img src={profileIcon} alt="Profile-icon" />
         </button>
       </div>
+      </div>
+      <Filters/>
     </div>
   );
 }
