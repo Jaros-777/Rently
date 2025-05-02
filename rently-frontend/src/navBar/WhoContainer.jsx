@@ -74,16 +74,16 @@ export default function WhoContainer(props) {
       }
 
     if(newCount.infants == 1){
-      newText = newText+ " " +newCount.infants + ", infant"
+      newText = newText+ " ," +newCount.infants + " infant"
     }
     if(newCount.infants > 1){
-      newText = newText+ " " +newCount.infants + ", infants"
+      newText = newText+ " ," +newCount.infants + " infants"
     }
     if(newCount.pets == 1){
-      newText = newText+ " " +newCount.pets + ", pet"
+      newText = newText+ " ," +newCount.pets + " pet"
     }
     if(newCount.pets > 1){
-      newText = newText+ " " +newCount.pets + ", pets"
+      newText = newText+ " ," +newCount.pets + " pets"
     }
   }
     props.setWhoInputText(newText)
