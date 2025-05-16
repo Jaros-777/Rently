@@ -15,7 +15,9 @@ export const HousesData =[
         town:"Warszawa",
         owner: "Piotr",
         price: 1000,
-        img: img
+        img: img,
+        type: "House",
+        rating: 4.8
     },
     {
         id: 1,
@@ -23,7 +25,9 @@ export const HousesData =[
         town:"Gdańsk",
         owner: "Piotr",
         price: 1200,
-        img: img2
+        img: img2,
+        type: "House",
+        rating: 4.8
     },
     {
         id: 2,
@@ -31,7 +35,9 @@ export const HousesData =[
         town:"Kraków",
         owner: "Piotr",
         price: 800,
-        img: img3
+        img: img3,
+        type: "House",
+        rating: 4.8
     },
     {
         id: 3,
@@ -39,7 +45,9 @@ export const HousesData =[
         town:"Poznań",
         owner: "Piotr",
         price: 950,
-        img: img4
+        img: img4,
+        type: "House",
+        rating: 4.8
     },
     {
         id: 4,
@@ -47,7 +55,9 @@ export const HousesData =[
         town:"Toruń",
         owner: "Piotr",
         price: 600,
-        img: img5
+        img: img5,
+        type: "House",
+        rating: 4.8
     },
     {
         id: 5,
@@ -55,7 +65,9 @@ export const HousesData =[
         town:"Toruń",
         owner: "Piotr",
         price: 400,
-        img: img6
+        img: img6,
+        type: "House",
+        rating: 4.8
     },
     {
         id: 6,
@@ -63,7 +75,9 @@ export const HousesData =[
         town:"Toruń",
         owner: "Piotr",
         price: 2000,
-        img: img7
+        img: img7,
+        type: "House",
+        rating: 4.8
     },
     {
         id: 7,
@@ -71,7 +85,9 @@ export const HousesData =[
         town:"Toruń",
         owner: "Piotr",
         price: 1300,
-        img: img8
+        img: img8,
+        type: "House",
+        rating: 4.8
     },
     {
         id: 8,
@@ -79,7 +95,9 @@ export const HousesData =[
         town:"Toruń",
         owner: "Piotr",
         price: 5000,
-        img: img9
+        img: img9,
+        type: "House",
+        rating: 4.8
     },
     {
         id: 9,
@@ -87,7 +105,9 @@ export const HousesData =[
         town:"Toruń",
         owner: "Piotr",
         price: 1000,
-        img: img
+        img: img,
+        type: "House",
+        rating: 4.8
     },
     {
         id: 10,
@@ -95,7 +115,9 @@ export const HousesData =[
         town:"Toruń",
         owner: "Piotr",
         price: 1000,
-        img: img
+        img: img,
+        type: "House",
+        rating: 4.8
     },
     {
         id: 11,
@@ -103,7 +125,9 @@ export const HousesData =[
         town:"Toruń",
         owner: "Piotr",
         price: 1000,
-        img: img
+        img: img,
+        type: "House",
+        rating: 4.8
     },
     {
         id: 12,
@@ -111,6 +135,58 @@ export const HousesData =[
         town:"Toruń",
         owner: "Piotr",
         price: 1000,
-        img: img
+        img: img,
+        type: "House",
+        rating: 4.8
+    },
+    {
+        id: 13,
+        country:"Poland",
+        town:"Toruń",
+        owner: "Piotr",
+        price: 5000,
+        img: img9,
+        type: "House",
+        rating: 4.8
+    },
+    {
+        id: 14,
+        country:"Poland",
+        town:"Toruń",
+        owner: "Piotr",
+        price: 1000,
+        img: img,
+        type: "House",
+        rating: 4.8
+    },
+    {
+        id: 15,
+        country:"Poland",
+        town:"Toruń",
+        owner: "Piotr",
+        price: 1000,
+        img: img,
+        type: "House",
+        rating: 4.8
+    },
+    {
+        id: 16,
+        country:"Poland",
+        town:"Toruń",
+        owner: "Piotr",
+        price: 1000,
+        img: img,
+        type: "House",
+        rating: 4.8
+    },
+    {
+        id: 17,
+        country:"Poland",
+        town:"Toruń",
+        owner: "Piotr",
+        price: 1000,
+        img: img,
+        type: "House",
+        rating: 4.8
     },
 ]

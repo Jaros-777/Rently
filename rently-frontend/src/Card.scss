@@ -1,5 +1,6 @@
 #card-container{
     cursor: pointer;
+    position: relative;
 
     img{
         width: 100%;
@@ -10,11 +11,27 @@
     }
 
     .grey-text{
-        color: grey;
+        color: rgb(43, 42, 42);
     }
     p{
+        font-size: 0.8rem;
         &:last-child{
             margin-top: 0.5rem;
+        }
+        img{
+            height: 1%;
+            object-fit: contain;
+        }
+    }
+
+    #addFavourite{
+        top: 1rem;
+        right: 1rem;
+        position: absolute;
+        transition: 0.2s;
+
+        &:hover{
+            scale: 1.1;
         }
     }
 }

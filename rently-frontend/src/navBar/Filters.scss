@@ -83,6 +83,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        align-items: center;
         
         #top{
             display: flex;
@@ -92,7 +93,8 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            border-bottom: 1px solid grey;
+            border-bottom: 1px solid var(--border-color);
+            width: 100%;
             
             p{
                 width: 100%;
@@ -116,6 +118,46 @@
             }
         }
 
+        #filter-content{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 95%;
+            height: 100%;
+            justify-content: flex-start;
+            
+
+            #type{
+                width: 100%;
+                font-size: 1.3rem;
+                border-bottom: 1px solid var(--border-color);
+                margin: 1rem 0;
+                
+
+                #type-content{
+                    display: flex;
+                    margin: 1rem 0;
+                    border: 2px solid var(--border-color);
+                    padding: 0.2rem;
+                    border-radius: 15px;
+                    justify-content: space-between;
+
+                    button{
+                        border: none;
+                        margin: 0;
+                        border-radius: 15px;
+                        height: 2.5rem;
+                        width: 33%;
+                        font-size: 1rem;
+                        
+                        &:hover{
+                            background-color: var(--main-grey-color);
+                        }
+                    }
+                }
+            }
+        }
+
         #bottom{
             display: flex;
             height: 3.5rem;
@@ -124,10 +166,11 @@
             justify-content: space-between;
             align-items: center;
             position: relative;
-            border-top: 1px solid grey;
+            border-top: 1px solid var(--border-color);
             bottom: 0;
             padding: 1rem 0;
-            box-shadow: 0px -10px 20px rgb(211, 210, 210);
+            box-shadow: 0px -10px 20px var(--border-color);
+            width: 100%;
 
             button{
                 font-size: 1rem;

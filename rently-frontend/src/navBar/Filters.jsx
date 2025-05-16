@@ -6,6 +6,19 @@ import closeIcon from "../assets/icon-close-black.png";
 export default function Filters() {
   const [filterIconData, setFilterIconData] = useState(FilterData);
   const[showFilters, setShowFilters] = useState(true);
+  const[filterDetails, setFilterDetails] = useState({
+    type:null
+})
+
+  const handleFilterDetails = (option, value) =>{
+    const newFilters = {
+      ...filterDetails,
+      [option]:[value]
+    }
+    console.log(option,value)
+    setFilterDetails(newFilters)
+  }
+
 
   return (
     <div id="filters-container">
@@ -19,21 +32,21 @@ export default function Filters() {
         ))}
         <button>{">"}</button>
       </ul>
-      <button onClick={()=>showFilters(true)}>Filters</button>
+      <button onClick={()=>setShowFilters(true)}>Filters</button>
       {showFilters ?
       <div id="drop-filter-container">
         <div id="drop-filter">
           <div id="top">
             <p>Filters</p>
-            <img src={closeIcon} alt="Close Icon" />
+            <img onClick={()=>setShowFilters(false)} src={closeIcon} alt="Close Icon" />
           </div>
           <div id="filter-content">
             <div id="type">
-              <p>Type of place</p>
+              <h4>Type of place</h4>
               <div id="type-content">
-                <button>Any type</button>
-                <button>Room</button>
-                <button>Entire home</button>
+                <button onClick={()=>{handleFilterDetails("type","any-type")}} style={filterDetails.type == "any-type" ? {border:"2px solid black", backgroundColor:"var(--main-grey-color)"} : null} >Any type</button>
+                <button onClick={()=>{handleFilterDetails("type","room")}}  style={filterDetails.type == "room" ? {border:"2px solid black", backgroundColor:"var(--main-grey-color)"} : null}>Room</button>
+                <button onClick={()=>{handleFilterDetails("type","home")}}  style={filterDetails.type == "home" ? {border:"2px solid black", backgroundColor:"var(--main-grey-color)"} : null}>Entire home</button>
               </div>
             </div>
             <div id="price-range">

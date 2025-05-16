@@ -18,6 +18,7 @@ html {
   --font-color: black;
   --main-grey-color: rgba(197, 197, 197, 0.35);
   --second-grey-color: rgba(197, 197, 197, 0.26);
+  --border-color: rgb(211, 210, 210);
   color: var(--font-color);
   background-color: #ffffff;
 }
@@ -29,6 +30,7 @@ body {
 }
 p,h4{
   margin: 0;
+  font-weight: 400;
 }
 button{
   background-color: #ffffff00;

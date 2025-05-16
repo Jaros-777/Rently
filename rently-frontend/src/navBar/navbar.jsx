@@ -13,6 +13,9 @@ import { SuggestedLocalizations } from "../DataBase/SuggestedLocalizations.js";
 import CheckInContainer from "./CheckInContainer.jsx";
 import WhoContainer from "./WhoContainer.jsx";
 import Filters from "./Filters.jsx";
+import IconRing from "../assets/icon-ring-belt.png"
+import IconBalloon from "../assets/icon-air-balloon.png"
+import IconHome from "../assets/icon-home.png"
 
 export default function NavBar() {
   const [bigNav, setBigNav] = useState(false);
@@ -26,6 +29,7 @@ export default function NavBar() {
   const [showWhereContainer, setShowWhereContainer] = useState(false);
   const [showCheckContainer, setShowCheckContainer] = useState(false);
   const [showWhoContainer, setShowWhoContainer] = useState(false);
+  const [currentPageOption, setCurrentPageOption] = useState(IconHome)
 
   // const bigNavRef = useRef(null);
   // const smallNavRef = useRef(null);
@@ -195,7 +199,7 @@ export default function NavBar() {
       if (navHeight) {
         navHeight.classList.toggle("scale-100", onTop);
         navHeight.classList.toggle("scale-90", !onTop);
-        navHeight.style.height = onTop ? "9rem" : "4rem";
+        navHeight.style.height = onTop ? "11rem" : "4rem";
       }
     };
 
@@ -235,6 +239,20 @@ export default function NavBar() {
         </div>
         {bigNav ? (
           <div id="big-nav-container">
+            <div id="main-option">
+              <div style={currentPageOption == IconHome? {borderBottom: "3px solid black"} : null} onClick={()=>setCurrentPageOption(IconHome)} className="option">
+                <img src={IconHome} alt="" />
+                <button> Homes</button>
+              </div>
+              <div style={currentPageOption == IconBalloon? {borderBottom: "3px solid black"} : null} onClick={()=>setCurrentPageOption(IconBalloon)} className="option">
+                <img src={IconBalloon} alt="" />
+                <button> Experiences</button>
+              </div>
+              <div style={currentPageOption == IconRing? {borderBottom: "3px solid black"} : null} onClick={()=>setCurrentPageOption(IconRing)} className="option">
+                <img src={IconRing} alt="" />
+                <button> Services</button>
+              </div>
+            </div>
             <div style={{ backgroundColor: "white" }} id="big-nav-inputs">
               <div
                 onClick={() => handleChoosenOption("where")}
@@ -411,6 +429,7 @@ export default function NavBar() {
         ) : (
           <div id="small-nav-inputs">
             <button className="input-btn" style={{ fontWeight: "bold" }}>
+              <img src={currentPageOption} alt="" />
               Anywhere
             </button>
             <div className="line"></div>
@@ -426,18 +445,17 @@ export default function NavBar() {
         )}
         <div id="nav-details">
           <button className="btn-classic" style={{ fontWeight: "bold" }}>
-            Airbnb your home
+            Become a host
           </button>
           <button className="btn-classic">
             <img src={earthIcon} alt="Language-icon" />
           </button>
           <button id="user-details">
             <img src={listIcon} alt="List-icon" />
-            <img src={profileIcon} alt="Profile-icon" />
           </button>
         </div>
       </div>
-      <Filters />
+      {/* <Filters /> */}
     </div>
   );
 }

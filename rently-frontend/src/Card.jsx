@@ -1,14 +1,17 @@
 import "./Card.scss"
+import IconStar from "./assets/icon-star.png"
 
 export default function Card(props) {
   return (
     <>
       <div id="card-container">
         <img src={props.img} alt="" />
-        <p>{props.town}, {props.country} </p>
-        <p className="grey-text">Hosted by {props.owner}</p>
-        <p className="grey-text">Apr 7-12</p>
-        <p><span style={{fontWeight:"bold"}} >{props.price}</span> zł night</p>
+        <p>{props.type} in {props.town} </p>
+        <p className="grey-text"> Apr 7-12 Hosted by {props.owner}</p>
+        <p className="grey-text">{props.price} zł night ★ {props.rating}</p>
+        <div id="addFavourite">
+          <img src={IconStar} alt="" />
+        </div>
       </div>
     </>
   );

@@ -36,10 +36,12 @@ function HomePage() {
             <Card
               key={offert.id}
               img={offert.img}
+              type={offert.type}
               town={offert.town}
               country={offert.country}
               owner={offert.owner}
               price={offert.price}
+              rating={offert.rating}
             />
           ))}
         </div>
