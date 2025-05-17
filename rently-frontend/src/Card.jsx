@@ -1,7 +1,12 @@
 import "./Card.scss"
-import IconStar from "./assets/icon-star.png"
+import { useState } from "react";
+import IconHeartOutline from "./assets/icon-heart-outline.png"
+import IconHeartFull from "./assets/icon-heart-full.png"
 
 export default function Card(props) {
+
+  const[fav, setFav] = useState(false)
+
   return (
     <>
       <div id="card-container">
@@ -10,7 +15,7 @@ export default function Card(props) {
         <p className="grey-text"> Apr 7-12 Hosted by {props.owner}</p>
         <p className="grey-text">{props.price} zł night ★ {props.rating}</p>
         <div id="addFavourite">
-          <img src={IconStar} alt="" />
+          <img onClick={()=>{fav ? setFav(false) : setFav(true)}} src={fav ? IconHeartFull: IconHeartOutline} alt="" />
         </div>
       </div>
     </>

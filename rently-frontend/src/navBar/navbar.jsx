@@ -189,10 +189,11 @@ export default function NavBar() {
     getTownApi();
   }, [town]);
 
-  // watch over navbar size
-  useEffect(() => {
+
+  
+  const changeNavHeight=()=>{
     const navHeight = document.getElementById("nav-content");
-    const handleScroll = () => {
+   
       const onTop = window.scrollY === 0;
 
       setBigNav(onTop);
@@ -201,15 +202,19 @@ export default function NavBar() {
         navHeight.classList.toggle("scale-90", !onTop);
         navHeight.style.height = onTop ? "11rem" : "4rem";
       }
-    };
+    
+  }
 
-    window.addEventListener("scroll", handleScroll);
+  // watch over navbar size
+  useEffect(() => {
+
+    window.addEventListener("scroll", changeNavHeight);
 
     // Wywołaj od razu na wypadek, gdyby użytkownik był już scrolnięty
-    handleScroll();
+    changeNavHeight();
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", changeNavHeight);
     };
   }, []);
 
@@ -427,7 +432,7 @@ export default function NavBar() {
             </div>
           </div>
         ) : (
-          <div id="small-nav-inputs">
+          <div onClick={()=>changeNavHeight()} id="small-nav-inputs">
             <button className="input-btn" style={{ fontWeight: "bold" }}>
               <img src={currentPageOption} alt="" />
               Anywhere

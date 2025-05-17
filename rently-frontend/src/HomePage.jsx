@@ -3,36 +3,40 @@ import Card from "./Card.jsx";
 import { HousesData } from "./DataBase/DataBase.js";
 import "./HomePage.scss";
 import { useEffect, useState } from "react";
+import img from "./DataBase/Houses/house2.jpg"
 
 function HomePage() {
   const [houseData, setHouseData] = useState(HousesData);
-  const [test, setTest] = useState("hej");
+  const [data, setData] = useState([]);
 
 
   const getHouses = async()=>{
     try {
       
-      const response = await fetch("http://localhost:8080/api/hello");
-      setTest(await response.text());
+      const response = await fetch(import.meta.env.VITE_JSON_Database);
+      // console.log(await response.text())
+      setData(await response.json());
 
 
     } catch (error) {
-      throw new Error("Cannot fetch from api");
+      throw new Error(error);
     }
   }
 
-  // useEffect(()=>{
-  //   getHouses();
-  // },[])
+   useEffect(()=>{
+      getHouses();
+   },[])
 
-
+   if(data.length == 0){
+    return <p>Please wait</p>
+   }
 
   return (
     <>
       <NavBar/>
       <div id="home-container">
         <div id="cards-container">
-          {houseData.map((offert) => (
+          {data.map((offert) => (
             <Card
               key={offert.id}
               img={offert.img}
