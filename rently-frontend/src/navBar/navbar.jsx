@@ -4,7 +4,7 @@ import profileIcon from "../assets/profile-icon.png";
 import searchIcon from "../assets/search-icon.png";
 import closeIcon from "../assets/icon-close-black.png";
 import emptyIcon from "../assets/empty.png";
-import Logo from "../assets/Rently-logo.webp";
+import Logo from "../assets/Rently-logo-red.png";
 import localizationIcon from "../assets/icon-localization.png";
 import "./navbar.scss";
 import { useEffect, useReducer, useRef, useState } from "react";
@@ -239,7 +239,7 @@ export default function NavBar() {
         <div id="nav-logo">
           <a href="#">
             <img src={Logo} alt="Logo" />
-            <p>Rently</p>
+            <p style={{color:"red"}}>Rently</p>
           </a>
         </div>
         {bigNav ? (
