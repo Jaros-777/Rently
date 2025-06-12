@@ -7,10 +7,8 @@ Because of time constraints resulting from academic obligations, the project was
   
 ## 🛠️ Technologies Used  
 - **✅React JS**  
-- **❌SpringBoot**  
-- **❌Hibernate**  
-- **❌PostgreSQL**
 
+## 📸 Screenshots  
 ![image](https://github.com/user-attachments/assets/0b9fcbe1-aedf-43d0-9583-22683bf6fc94)  
 ![image](https://github.com/user-attachments/assets/f202e784-f9d5-432b-b741-5c8746fc9520)  
 ![image](https://github.com/user-attachments/assets/e5cc2470-ae81-4dec-9306-79acd6e7f311)  
